@@ -33,9 +33,9 @@ public class JwtTokenUtil {
    * @return
    * */
     public String generateToken(UserDetails userDetails){
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME,userDetails.getUsername());
-        claims.put(CLAIM_KEY_USERNAME,new Date());
+        Map<String, Object> claims = new HashMap<>(); //先准备一个荷载claim
+        claims.put(CLAIM_KEY_USERNAME,userDetails.getUsername());//在claims中添加当前用户信息，以及添加当前的创建时间
+        claims.put(CLAIM_KEY_CREATED,new Date());
         return generateToken(claims);
     }
 /**
@@ -49,9 +49,9 @@ public class JwtTokenUtil {
 
     private String generateToken(Map<String,Object> claims){
          return Jwts.builder()
-                 .setClaims(claims)
+                 .setClaims(claims)//先将荷载放入到Jwt中
                  .setExpiration(generateExpirationDate())
-                 .signWith(SignatureAlgorithm.ES512, secret)
+                 .signWith(SignatureAlgorithm.ES512, secret)//使用ES512算法和密钥
                  .compact();
 
     }
