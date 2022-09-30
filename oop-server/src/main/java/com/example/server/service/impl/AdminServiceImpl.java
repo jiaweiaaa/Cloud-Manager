@@ -51,7 +51,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public RespBean login(String username, String password, HttpServletRequest request) {
         //login
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);// 调用权限框架方法获取用户名
         if(null==userDetails||!passwordEncoder.matches(password,userDetails.getPassword())){
             return RespBean.error("Username or password incorrect");
         }
@@ -65,8 +65,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         //generate token
         String token = jwtTokenUtil.generateToken(userDetails);
         Map<String,String>tokenMap =new HashMap<>();
-        tokenMap.put("token",token);
+
         tokenMap.put("tokenHead",tokenHead);
+        tokenMap.put("token",token);
+
         return RespBean.success("Login successful",tokenMap);
     }
 

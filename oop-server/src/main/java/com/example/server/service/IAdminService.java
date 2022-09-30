@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Jiawei
  * @since 2022-02-23
  */
+
 public interface IAdminService extends IService<Admin> {
     /**
      * Return token after login

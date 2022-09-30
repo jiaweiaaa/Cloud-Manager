@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +29,8 @@ public class LoginController {
     private IAdminService adminService;
 
     @ApiOperation(value = "Return token after login")
-    @PostMapping("/login")
-    public RespBean login(AdminLoginParam adminLoginParam, HttpServletRequest request){
+    @PostMapping("/login")//@RequestBody主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)；GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。在后端的同一个接收方法里，@RequestBody与@RequestParam()可以同时使用，@RequestBody最多只能有一个，而@RequestParam()可以有多个。
+    public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest request){
         return  adminService.login(adminLoginParam.getUsername(),adminLoginParam.getPassword(),request);
     }
 

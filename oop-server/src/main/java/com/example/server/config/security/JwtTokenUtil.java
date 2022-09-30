@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-
 public class JwtTokenUtil {
     private static final String CLAIM_KEY_USERNAME="sub" ;
     private static final String CLAIM_KEY_CREATED="created";
@@ -51,7 +50,7 @@ public class JwtTokenUtil {
          return Jwts.builder()
                  .setClaims(claims)//先将荷载放入到Jwt中
                  .setExpiration(generateExpirationDate())
-                 .signWith(SignatureAlgorithm.ES512, secret)//使用ES512算法和密钥
+                 .signWith(SignatureAlgorithm.HS512, secret)//使用HS512算法和密钥
                  .compact();
 
     }

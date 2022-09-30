@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value= "AdminLoginObject", description = "")
 
